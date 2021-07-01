@@ -11,6 +11,7 @@ router.post('/swishurl', async(req, res) => {
 
     const { longUrl } = req.body;
     const baseUrl = config.get('baseUrl');
+    let payLoad = {};
 
     if (!validUrl.isUri(baseUrl)) {
         return res.status(401).json('Invalid URL');
@@ -42,7 +43,7 @@ router.post('/swishurl', async(req, res) => {
                         date: new Date()
                     }]
                 }).then(result => {
-                    res.status(result.statusCode).json(result.data);
+                    res.status(result.statusCode).json({ longUrl: longUrl, shortUrl: shortUrl, urlCode: urlCode });
                 }, error => {
                     res.status(500).json(error);
                 });
