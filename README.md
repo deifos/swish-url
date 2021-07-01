@@ -6,7 +6,7 @@ A little project to decompress our brains after work or before.
 Because builders build. 
 
 # to start
-run dev
+npm run dev
 
 # POST
 /api/url/swishurl
