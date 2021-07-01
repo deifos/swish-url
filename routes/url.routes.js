@@ -11,7 +11,6 @@ router.post('/swishurl', async(req, res) => {
 
     const { longUrl } = req.body;
     const baseUrl = config.get('baseUrl');
-    let payLoad = {};
 
     if (!validUrl.isUri(baseUrl)) {
         return res.status(401).json('Invalid URL');
