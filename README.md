@@ -11,6 +11,9 @@ npm run dev
 # POST
 /api/url/swishurl
 
+# REDIRECT
+/go/<code>
+
 body: {
     "longUrl": "http://this_is_a_long_url"
 }

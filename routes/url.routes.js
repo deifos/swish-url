@@ -7,6 +7,13 @@ const db = require('../config/dbconfig');
 const SCHEMA = process.env.INSTANCE_SCHEMA;
 const TABLE = 'url_records';
 
+router.get('/all', async (req, res) => {
+    const QUERY = `SELECT * FROM ${SCHEMA}.${TABLE} WHERE urlCode IS NOT NULL ORDER BY date DESC LIMIT 10`;
+    const list = await db.query(QUERY);
+    res.json({ items: list });
+
+});
+
 router.post('/swishurl', async(req, res) => {
 
     const { longUrl } = req.body;
@@ -53,7 +60,7 @@ router.post('/swishurl', async(req, res) => {
             res.status(500).json(err);
         }
     } else {
-        res.status(500).json('invalid long url');
+        res.status(500).json({message: 'invalid long url'});
     }
 });
 

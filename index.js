@@ -6,6 +6,7 @@ app.use(express.json({ extend: false }));
 
 app.use('/', require('./routes/index'));
 app.use('/api/url', require('./routes/url.routes'));
+app.use('/go', require('./routes/redirect'));
 
 const PORT = 5000;
 
