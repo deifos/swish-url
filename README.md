@@ -1,21 +1,39 @@
 # swish-url
-URL shortener our way
+URL shortener our way.
 
 A little project to decompress our brains after work or before. 
 
 Because builders build. 
 
-# to start
+## How to start
+### Production
+```shell
+npm run start
+```
+### Development
+It will start "nodemon" to watch for changes on your code with auto-refresh
+```shell
 npm run dev
+```
 
-# POST
-/api/url/swishurl
+## How to use
+### Inserting
 
-# REDIRECT
-/go/<code>
-
-body: {
+```json
+POST /api/url
+{
     "longUrl": "http://this_is_a_long_url"
 }
+
+--- Returns ---
+{
+    "longUrl": "http://<long_url>",
+    "shortUrl": "http://<short url>"
+}
+```
+
+### REDIRECT
+http://localhost/go/_\<short code\>_
+
 
 

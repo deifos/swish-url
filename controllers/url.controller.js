@@ -10,47 +10,42 @@ exports.createShortURL = async(req, res) => {
     const { longUrl } = req.body;
     const baseUrl = config.get('baseUrl');
 
-    if (!validUrl.isUri(baseUrl)) {
-        return res.status(401).json('Invalid URL');
+    if (!validUrl.isUri(baseUrl) || !validUrl.isUri(longUrl)) {
+        return res.status(400).json({message: 'Invalid URL'});
     }
 
     //@maestre do your magic
     const urlCode = shortId.generate();
 
-    if (validUrl.isUri(longUrl)) {
+    try {
+        const QUERY = `SELECT * FROM ${SCHEMA}.${TABLE} WHERE longUrl="${longUrl}" LIMIT 1`;
+        const url = await db.query(QUERY);
 
-        try {
-            const QUERY = `SELECT * FROM ${SCHEMA}.${TABLE} WHERE longUrl="${longUrl}"`;
-            const url = await db.query(QUERY);
+        if (url.data.length) {
+            const item = url.data[0];
+            const shortUrl = baseUrl + '/go/' + item.urlCode;
+            res.json({ longUrl: item.longUrl, shortUrl });
+        } else {
+            const shortUrl = baseUrl + '/go/' + urlCode;
 
-            if (url.data.length) {
-                console.log('url already exists');
-                res.json(url.data);
-            } else {
-                const shortUrl = baseUrl + '/' + urlCode;
+            //write new URL to DB
+            db.insert({
+                table: TABLE,
+                schema: SCHEMA,
+                records: [{
+                    longUrl: longUrl,
+                    urlCode: urlCode,
+                    date: new Date(),
+                    counter: 0,
+                }]
+            }).then(result => {
+                res.json({ longUrl, shortUrl });
+            }, error => {
+                res.status(400).json(error);
+            });
+        };
 
-                //write new URL to DB
-                db.insert({
-                    table: TABLE,
-                    schema: SCHEMA,
-                    records: [{
-                        longUrl: longUrl,
-                        shortUrl: shortUrl,
-                        urlCode: urlCode,
-                        date: new Date()
-                    }]
-                }).then(result => {
-                    res.status(result.statusCode).json({ longUrl: longUrl, shortUrl: shortUrl, urlCode: urlCode });
-                }, error => {
-                    res.status(500).json(error);
-                });
-            };
-
-        } catch (err) {
-            console.log('error with url');
-            res.status(500).json(err);
-        }
-    } else {
-        res.status(500).json('invalid long url');
+    } catch (err) {
+        res.status(400).json(err);
     }
 }
