@@ -37,3 +37,5 @@ http://localhost/go/_\<short code\>_
 
 
 
+## Thunder Client
+You can import the collection under `/docs`
