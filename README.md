@@ -5,6 +5,8 @@ A little project to decompress our brains after work or before.
 
 Because builders build. 
 
+![swish](https://user-images.githubusercontent.com/3884823/124386567-0bc55e80-dca9-11eb-9210-079f7cb78e15.png)
+
 ## How to start
 Download the repo and install dependencies
 ```shell
