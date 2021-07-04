@@ -5,6 +5,15 @@ A little project to decompress our brains after work or before.
 
 Because builders build. 
 
+## Internals
+This project uses these technologies:
+* [HaperDB](https://harperdb.io/)
+* [Harperive](https://chandan-24.github.io/Harperive/) (DB client for node)
+* [Express JS](https://expressjs.com/)
+
+
+### Final Product
+
 ![swish](https://user-images.githubusercontent.com/3884823/124386567-0bc55e80-dca9-11eb-9210-079f7cb78e15.png)
 
 ## How to start
@@ -12,7 +21,7 @@ Download the repo and install dependencies
 ```shell
 npm install
 ```
-Then copy `.env.sample` into `.env` and change the values to your own credentials, you will need a HarperDB database or your own local instance (e.g. Docker) of HarperDB.
+Then copy `.env.sample` into `.env` and change the values to your own credentials, you will need a [HarperDB database](https://harperdb.io/product/harperdb-cloud/) or your own local instance [Docker HarperDB](https://hub.docker.com/r/harperdb/hdb).
 
 ### Run Development
 It will start "nodemon" to watch for changes on your code with auto-refresh
