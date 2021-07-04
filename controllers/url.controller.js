@@ -92,26 +92,38 @@ const redirectUrl = async (req, res) => {
     }
 };
 
-const getStats = async (req, res) => {
+const getOne = async (req, res) => {
     const shortCode = req.params.shortCode;
-    const SQL = `SELECT longUrl,id,counter, urlCode FROM ${SCHEMA}.${TABLE} WHERE urlCode = "${shortCode}" LIMIT 1`;
-    const list = await db.query(SQL);
-    list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
-    res.json(list);
+    const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} WHERE urlCode = "${shortCode}" LIMIT 1`;
+    try {
+        const list = await db.query(SQL);
+        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode));
+        res.json(list.data);        
+    } catch (error) {
+        res.status(404).send([]);
+    }
 };
 
 const getLast5 = async (req, res) => {
-    const SQL = `SELECT * FROM ${SCHEMA}.${TABLE} ORDER BY __createdtime__ DESC LIMIT 5`;
-    const list = await db.query(SQL);
-    list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
-    res.json(list);
+    const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY __createdtime__ DESC LIMIT 5`;
+    try {
+        const list = await db.query(SQL);
+        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
+        res.json(list.data);
+    } catch (error) {
+        res.json([]);
+    }
 };
 
 const getMostPopular5 = async (req, res) => {
-    const SQL = `SELECT * FROM ${SCHEMA}.${TABLE} ORDER BY counter DESC LIMIT 5`;
-    const list = await db.query(SQL);
-    list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
-    res.json(list);
+    const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY counter DESC LIMIT 5`;
+    try {
+        const list = await db.query(SQL);
+        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
+        res.json(list.data);
+    } catch (error) {
+        res.json([]);
+    }
 };
 
 const maintenance = async (req, res) => {
@@ -139,7 +151,7 @@ const maintenance = async (req, res) => {
 module.exports = {
     createShortURL,
     redirectUrl,
-    getStats,
+    getOne,
     getLast5,
     getMostPopular5,
     maintenance,

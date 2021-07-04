@@ -5,7 +5,7 @@ const controller = require('../controllers/url.controller')
 router.post('/', controller.createShortURL);
 router.get('/popular', controller.getMostPopular5);
 router.get('/last5', controller.getLast5);
-router.get('/:shortCode', controller.getStats);
+router.get('/:shortCode', controller.getOne);
 router.post('/maintenance', controller.maintenance);
 
 module.exports = router;
