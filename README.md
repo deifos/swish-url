@@ -14,7 +14,7 @@ This project uses these technologies:
 
 ### Final Product
 
-![swish](![image](https://user-images.githubusercontent.com/3372909/124412853-6dbfab80-dd1d-11eb-9ab8-b2586d8dd321.png))
+![swish](https://user-images.githubusercontent.com/3372909/124412853-6dbfab80-dd1d-11eb-9ab8-b2586d8dd321.png)
 
 ## How to start
 Download the repo and install dependencies
