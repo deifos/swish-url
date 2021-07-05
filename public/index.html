@@ -5,57 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.0.0-insiders.4a070ac/tailwind.min.css"
-        integrity="sha512-vJu7D5BpjnNXVpLBrl9LKLvmXBNjiLwge8EOZ/YS9XwiChpfKLAlydwIZvoJaDE3LI/kr3goH0MzDzNbBgyoOQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAV3UlEQVR4Xu1dCZhUxbX+q7unZ6aXWUAWJ8EZBAUl7ooisgjI4oKgyCI+lSU+zYuiz+Ulzxc1n8szaiQucYOBh/JQwShE2UQEQSGoGMUtIuKMxJF9lp61p/tWvnOZhp7ue3uamb63l3vq+/jkk3ur6vznv9Wn6pw6RyD+Jno/ecAbyJZF0mY/WQg5AsDpEKIXFJkPgez4u+InGYEIBCSaYBPVkPI7AJ9KKd4RSvArR5Oo2HFLZx8AGQ9mIp6HSubLHASrrwOC4wBxKoDuAGzxvMvPMALtREABsBuQ2wD7UtjzF5RNE41t9RWb0IulvdhXNVhI5WVAdGurM/53RsA4BOQeKWxTyr0FGzBRBPXG0SV0j9J9RTbpuENAzgCQZ9xEuWdGIG4EaiREqSICj+2a0aVC6y1NQvecW1msQL4sgHPZtIgbbH7QHAQUCWyxQUz5fmZheeSQUYQumnegh1MRCwEMNmd+PAoj0C4ENvht8pqK6Z13hb/ditCHzAz7YgEMbNcQ/BIjYCICEvhAEcGJ4ebHEULTBrCm6lEBOYvNDBO1wkN1BAFFQjxRnldwZ2ijeJjQxaWVFwopl/IGsCP48rtJQKBGCjGufEbhOhpbJfShc+aDZXw0lwR18JAJQEDugb1TCZ1TE6FFydyqGwDluQT0zF0wAklCwHZj2cyCF8idnRdw4VVAjE7STHhYRiABCMhVjnpMEiXP7+8Lu20tgKIE9MpdMALJQqACQWW4KC6tulJIZTGfbCRLDzxughBQpLBNFCVzDj4LgRsT1Cl3wwgkDwGJ50TJ3IObAAxI3ix4ZEYgYQhsFiWllXsgZdeEdckdMQLJQkCIvWRyNHJwfrI0wOMmFAGJJjI54roJkNCBuTNGwCAEmNAGAcvdJgcBJnRycOdRDUKACW0QsNxtchBgQicHdx7VIASY0AYBy90mBwEmdHJw51ENQoAJbRCw3G1yEGBCJwd3HtUgBJjQBgHL3SYHASZ0cnDnUQ1CgAltELDcbXIQYEInB3ce1SAEmNAGAcvdJgcBJnRycOdRDUKACW0QsNxtchBgQicHdx7VIASY0AYBy90mBwEmdHJw51ENQoAJbRCw3G1yEGBCJwd3HtUgBJjQBgHL3SYHASZ0cnDnUQ1CgAltELDcbXIQYEInB3ce1SAEmNAGAcvdJgcBJrRBuPcusGHiidloCkocaJD46mAQXx4Ioq6ZE1UZBLnaLRM6gehm2YCe+TZM65eDy3s5ketoXQayISCxblczln3nxyd7AtjfyOROIPxM6ESCWZAtMOuMHIzp6UQ3ly1m1/6gxFcHgljyrR+vf+tHY5CJnShd8AqdACT7FNrx3Ag3SvLsR9WblMDqcj/u2lgPn59JfVTg6TzMhO4AimRQDOmRhXvPdaEkP/aqHGuYL/cHce/memzdG+jAbPhVtqE7yIFLejrxyGAXXBG2cnu63degYPLyWuysDrbndX6nBQFeodtJhXO6OfDHIW708LZ/ZY4c+mCjxPS3fdi2Lwg2QNqnGCZ0O3DrmWfHwjEeFHn0yVzjl/hwdwDb9gXga5aY0icbJxa2bWN/dSCAGWtqsbuOKd0O1fCx3dGClucUeOpCNwb/PCvqVaJgZaPEku1NKP2iCWRGhFphtsB9A1wYXeKEsw1er9/VjP94tw71ASb10eqHV+ijRGxav2z81zm5yLa3PmOmbv5x8NDmjlZmrUbn0nQ+fftZOTgmN7apMufzRjy2tQF+NqmPSkNM6KOAq1O2wMZJ+XBlRZO5slHBqNdrsK+h7VX1/CIHnh/hgUejn9B0qpskZq6pxcd7+OTjKFTEJke8YNFJBpkaw46LNjV+qlNw87o6bD0K8p3exYGHB7lAZ9h6bcM/m1VSNx+xXOKdrmWf4xU6TtWPLM7Cn4a6o9zZ9PrsrQ14+rNGKG0vzq1G69fZjmeGe3CczkkJ9ffAlnrM/7IpzlnyY0zoODjgsAHPDvdghMbqXFYTxOXLfKBTjfa0Acc68NQwDzrnRJsx1N/uOgUT3vLhx1pepuPBlwkdB0oDixwoHelFdoR14FeAKct9+KSDHr5RJVl4dJAbXmc0qSnM47GPG/D8tkY+m45DV0zoNkCiw4ylY/Pwi2Oibd3VZX7ctLauw0SjKL17B7gwtW+25mx2VAUxdpkPFK3HLTYCTOg2GEImwaKLvVFPUZzzb9+vxxs7/Anh2M88Niwc7UFJfvSHQzT+7/fr8co3bEu3BTYTOgZCtDrff74LUzRWTrJtx//Vh931ibNt+xTasHxcHuy2aNODbPTzFlWjgUNNY3KaCR0DHoprXjDKgz6dolfNt3b61aO6RDai8R8GuTDhhGwIjT3iXRvrsGR7Yn4REjnvVOqLCR1DG7QZnD/KC7JxI9vUlT5sqki80+OMrg7MG+kBXRiIbCvL/Lj9vXq2pWPojAkdA5zZQ9wY19sZ9URFrYJBi6uP+tw5npWMrI0XRrgx/LjoccnMuXqlD99XJ87MiWdO6fQME1pHWxSEtGlyPtwa7mnanNGG0Kh2Whc7Xr8sD5GmNG0Of7+5Hgu+4s2hHvZMaB1kLj3eqbq6IxuR6uZ1tVi+s9koPqv9LhrjwYCiaDf75/sDqiOHD/C04WdCa+BCK+PjQ9xqZFxk29+g4PrVtWpKAiPb5D5OPDjQHbVKkzt8zBs12F5p7PhGymZk30xoDXS75Nrw0hiPZuDQ1weDmP42BeAba8ee3NmO+SM96Kpxg/ypTxvx+NYGI3mRtn0zoTVUd1oXB+Ze5NaMWX7/x2b8ck0tGg1eIMmGn3uRB+d0d0TNkKL6/m0VeQ7TlneGTZwJrQHtxT2z8MRQDygoKbIt+kcT7v7AuA1haDw6tHtgoAtXazh1KFBp2upafFtl8FdlGO2M65gJrYHtnWfn4len5Wiifu+merz4tTmnDON7O1VbPrJRYpqb363DOz8YuzE1jnbG9cyE1sD2/0Z5METjziA9ShvC9/5pDpGK82xYf1W+pvaf+rQBj29tNI4ZadozE1pDcZsn56O7W/vO34VLqlFWY+yG8LDZIYCvryvQvL/40e4AJi73pSntjJs2EzoC224ugc2TCzRjKejC6ikvVZp6cXXpWC9okxrZKJT0nEXVnM00AhgmdAQgl/Z04qlh0XYrPUabsJF/qTFuedHomYKVKC2vVrthTS3WsB3dChomdART7u6fi5mnaG8IV3zvV/NlmNluPSMXs87Ung/l/6BEj9yOIMCEjmDDoos9GHBstMuZHnt2WyMe+chchwZlXHroApcmZyvqFJBNz7k7mNCaBKEw0U2TC3BMrvaF1Xs21+MlkwODLuyRpYaTajWqBnDlmz58w27ww/DwCh3GFLoGtXJ8nuZlVXqMcmSsNdlmPamTHSvG52kSmlbmW9bXYnWZOceI6WDaMKHDtHRWVzteHOPVTY97yRs1aq0UMxt9ZBsm5kcFKdEcKFDp4Y/qMedzcxw9Zsrd3rGY0GHIjemZhT8N8WgmU6TVkOxVslvNbMe6bVg/MR9OnVR4C79uwn2b68FXDQ9phQkdxs5rT87GPee5oJGHEVVNEqNfr8GeBF6KjefDIAfP2gl5ur8alC7s39+p4zotLWAyoUNAAPjPs3Lx69O1j8goXHTssviSMcZD1HifoYu6b1+ZB4q+02qUuemypT7Ucrk4XqHDCUKRdQ+c78KkPtpOjPKaoHqicMDkUmwUD71qfB4KdVKFNQWBga9UmT6veD9Is5/jFboFcUrz9edhHgzXyF9Hj9DRGKX9qmwy9/ITEXrFOC86x8gnPXm5D1t0clKbTahkj8eEbtEApcslp4pW3AQ98vn+oBpUT3mbzWxkcqy6Ik8zrUFoHg9tqcecL/ikgzeFYcz0Zgm8Nc6L43RqDdItEbp61d4so+39COiU490J+ciJjk863KURSW/aO99kv8crdIsG8rOFet6rt/n6208B9eqV2ZsvqrL13lX5mtF/IfKU+4IYutjcoKlkE1dvfCZ0CzLdXZSHQztslB75oOLQ8ZjZxedjeQpDSiUHy+kLq7gaLZ9DH/nOz+rmwGuXRmcZDT2x8cdmNXWu2YTu392BVy/Rn1dofpctrcEXBqdWSNVVOXxevEK3oKF3fy8EFl27+tVa80ut0VUwuhLWVqPkN28ZnPymrTmkwr8zoVu0QA6V28/K1dXJu7ua8et360xPlHjZ8U48qZHBKXKiD33IMR18yhHGCnKqTD1J26lCj60p92PWevMzf5I7/vcDtOOhw0k974tG3L/F3FjtVFiRI+fAK3QLIpRYRivjZwiwVWV+3La+3vSYid/2z8UNOjdowpX55k764OogzT0mTzlOM6FbVPLW5Xnop1FHJaQxOuu9Y0MdyNWc6EYVZikfNLm3C7Nt6o3zXgU2nFBgx9ndHDGdKqG5rG+x8a1eh4UJ3cKIj6cW6JZWo0doBbwzAYSmmJGSPLtK2BML7Gp1AHKeUAUs+kPn4ERw7VAk/U+JHD90Tm62az7RH3dH+2NCA2rKr+3XF8Z0XugRmkJNHTYBuw1wqH8HnHahloAjd3pJng3HF9hV8vbtZMfx+XbNFGMdVeQ3LUkkzY7X7ui8E/0+ExpQ7xB+dHVBTGypMP2aH/ygtdNph1qmIssmVJc0raihPy4H1FW2MMeGfKeI+ZEkUpmU7+7aVT7stHh2fyY0oK6eq6/UvreXSNIZ2RcFTV29wmf6FTEjZWpP30xoAPF649oDsFnvUIF7CiPtaFVbs+Zr1DhMaECt4T3nora9cUYpIVH9Tl9di3UmJZJM1JwT3Q8TGkBbbu9Egx7qL6BA9Tw2BiSobnizIkH/j4KNqFFpDLLTPVmHjvQ06nG2mtpv3q/Dq99Yu44hExrAdSdn4z4Nb1ytX8Kjc5cvXpKTo4PsWzp9+LE2iB/rFFBZuN11EtV+qRK6ofkQof3BMEILgC56Z9kBitWmk5Jbz8hBsU68Ns1n9icNePLv1k6xy4QG1IuxWnEcQxdX49JeTlxQ5EAPr73VbfCQQy6oAL5miYMNCvbWS/VW+N56RSXuDz4Fu3xB1CUoDwzNUe8SLxH6/79uwv9ssnauOyY0FYbv78IvT4mO4/jFi1WHw0XpfDknLL+BIqWaC4PydZjlbZ5wghMPD3JrplkgQpN7nkJcrdyY0AD+9wIXJmvc9g4ndCqQ5IKiLDwz3K2bqmzLTwFMXmHtJOiWJzS5mCk8kwptRrZUI/SJhXYsGOXRrS5AtQtHvW7tq1iWJzRtuih9wUUa6QtSjdAUwPSXy7yq+1yr7WtQ0H9RdSr8mCRtDpYnNMVbPDfCjUE/i84JnWqEpl+ThWM8OF+jZDIxiI79+syvMs2mTxprYwxseULTbe8XRnhUb2Gqmxw0v7bio09eUGnpgpyWJzSVQaaKrad2if4ZT7UVmgg9poQ2hvpezXMXVWNvg7kZUlNppbY8oYvcNswbpV3XOxUJ/XOPDRsnadcuJGINe60a31s44s7yhKbilgtGeUH/TQeTg+xoCnXtrFM24/JlNdi234BrNam0DLMNrY9A7wI7XhqtfRSWiis0SUJHd4N1Kt1SCOnmn6xb1d7yKzRlJlp0sVfz3l6qEvqus3Nxk04t8plv12LtrgT52tNkVQ6fpuUJfeoxDrxyiUe9cZIOJgfN8eKeTjw9zK1573DWujr8dad1I+4sT2i6VU2ptrRCM1N1haYTmUVjvHBnRX+Ev9lYh1e3M6HT8MclMVOmBOd0bKfVUpXQdPF2wWgvjvNGb2Tv/1s95n1p3VzRll+hr+6bjQcHamcmSlVCd8oR6g2bM7tGO4Me+7gBf/7MujHRlif0bWfm4JYztHPapSqh6ca5Gn9SHO2uf/rTRvxxq3VTglme0A9foF8oKFUJTebR3f1zMVMjRdjczxvx4IdM6MQYpGnYy/xRHgzVOdNNZUJfdaITjwxyRyFOhTh/Z+FbK5ZfoVeM9+KkTtoFTFKZ0Kd3ceCNsdGJ0Jds9+Oujda9tWJ5Qm+dWgDaZKXTKQfNlW6C//2afDUNWXhbtsOPW99jQqehsdDxKVP97G+mFep2lMorNE2aKsxShtLwtrLMr1YasGqz9ApN57jvTdSPXEt1Qt9/vgvXRCRpX/tDM2auqbUqn61dvP60LnYsHauf0y7VCT2uVxZmD23tFKJaMNevZkJb8oseWZyF50foB8unOqEp5HXthPxWaQ02VTRj6komtCUJPb1fDn53nn6hoFQnNKXtXX1FXqtb4B/+FMAkC6cysLQNHctLSF94qhOaIgRfHO1Ry1aE2ke7A5i43Lq5OSxN6LZSa6U6ockF/odBbjXZJBP6EAKWJrSe+zhEjlQnNJ1A06/MzWGxKLxCzz1oVmq2lLPT7x/owjV99WsTpjqhCVBygT800H24bgsT2sKEnj3EjXFhP9eRX1w6EPq8Yx2YN/LIjRvK4H/lm2xDp9zqacaE7jnXhXM0EsyExqbNVarX/aM0DLOHutWKW9R2VAdx23r2FJrBn5Qbg1LkxqoHSNn0U90eo/mTHKFG86V5W7VZelNoVaVnstxM6EzWrgVlY0JbUOmZLDITOpO1a0HZmNAWVHomi8yEzmTtWlA2JrQFlZ7JIjOhM1m7FpSNCW1BpWeyyEzoTNauBWVjQltQ6ZksMhM6k7VrQdmY0BZUeiaLzITOZO1aUDYmtAWVnskiM6EzWbsWlI0JbUGlZ7LITOhM1q4FZWNCW1DpmSwyEzqTtWtB2ZjQFlR6JovMhM5k7VpQNia0BZWeySIzoTNZuxaUjQltQaVnssiiZM7BRgjoZyzMZOlZtsxCQKJJlJRW7oGUXTNLMpbGkggIsZdMjk0ABlgSABY60xDYTIR+BsBNmSYZy2NJBJ4VxXMqrxBCLgEQlsPSkmCw0OmNgCKluEqUPL+/L+y2tQCK0lsenr3FEahAUBkuej95IC/gwquAGG1xQFj8tEZArnLUYxLlyxYlc6tuAJTn0loenrzFEbDdWDaz4AU1gX3JfJmD4MEyQHSzOCosfloiIPfA3qmkbJpoPFyRobi08kIh5VIA+sWv01JYnnSGI1AjhRhXPqNwHcl5pMTIYmkvrql6VEDO4hOPDKdA5oinSIgnyvMK7sREEWxNaAA9SvcV2aT9NcGOlsxReQZLIoHNighO2DWjS0VIzKgiUD3nVhZLyBcBDM5gLFi09Edgg4C49vuZheXhomhWNSuad6BHliJeblmp2eGS/srPJAkUWpmbbXJKxfTOuyIF0y3Td8j8cNwhIGfwRjGT+JDWstRIiFJFBB4LNzPaXKEPP0AbRV/VYCGVl/lIL62JkAGTl3uksE0p9xZsCG0AtYSKVUj18POHzqmrrwOC4wBxKoDufBKSARxJbRGoHu5uQG4D7Ethz19A58xtTTkuQrd0Qm5ybyBbFkmHo59QlBEQOA1C9IIi8/mSQFtQ87/HRECiCTZRDSm/g8Rn0mZ7RwQCXzqaRMWOWzr7EGeV6n8BNLkXAaZsjCcAAAAASUVORK5CYII=" />
-
+    <title>Swish URL - shrink your url</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.0.0-insiders.4a070ac/tailwind.min.css" integrity="sha512-vJu7D5BpjnNXVpLBrl9LKLvmXBNjiLwge8EOZ/YS9XwiChpfKLAlydwIZvoJaDE3LI/kr3goH0MzDzNbBgyoOQ==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <script src="./scripts/qrcodejs/qrcode.min.js"></script>
 </head>
-<body>
+<style>
+    body {
+        font-family: 'Lato', sans-serif;
+    }
+</style>
+
+<body class="bg-gradient-to-r from-black via-blue-1000 to-gray-900 flex flex-col h-screen justify-between">
     <form method="post" action="/api/url">
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
                 <div class="flex flex-col text-center w-full mb-20">
-                    <h2 class="text-xs text-indigo-500 font-medium title-font mb-1">Swish URL</h2>
-                    <h1 class="text-3xl font-medium title-font mb-4 text-gray-900">Shorten a URL</h1>
-                    <p class="lg:w-2/3 mx-auto">You just need to provide the URL you want to
-                        shorten and we will provide you with a very handy URL you can share. Easy to memorize, spell or say
-                        as well.</p>
+                    <h1 class="font-medium tracking-wide mb-4 text-xl text-white font-bold subpixel-antialiased">Swish URL</h1>
+
                 </div>
-                <div class="flex">
-                    <div class="mx-auto">
-                        <input 
-                            type="text"
-                            id="longUrl"
-                            name="longUrl"
-                            class="border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent rounded-md"
-                            placeholder="Enter URL here" />
+                <div class="flex pt-12">
+                    <div class="relative flex w-full flex-wrap items-stretch mb-3 ">
+
+                        <span style="font-size: 3em;" class="z-10 h-full ml-9 font-bold leading-snug font-normal absolute text-center text-white absolute bg-transparent rounded text-lg items-center justify-center w-8 py-3">
+                            <i class="fas fa-link"></i>
+                          </span>
+                        <input autocomplete="off" type="text" id="longUrl" name="longUrl" style="font-size: 3em; caret-color: aliceblue;" class="px-3 py-4 tracking-tighter ml-20 placeholder-grey text-white font-bold relative  rounded outline-none border-0 w-full pl-10 bg-transparent"
+                            placeholder="Paste your long URL" />
                         <input type="hidden" name="redirect" value="true">
                     </div>
                 </div>
 
                 <div class="flex justify-center mt-10 hidden" id="shortUrlContainer">
-                    <div class="shadow-lg rounded-2xl w-1/3 p-4">
-                        <p class="text-gray-400 font-medium mb-2 mx-auto">
-                            Your short link is
-                        </p>
-                        <p class="text-gray-800 text-lg" id="shortUrl"></p>
-                    </div>
+
+                    <p style="font-size:3em" class="text-white animate-fade-in-down" id="shortUrl"></p>
+
                 </div>
-        
-                <button type="submit" id="submit" class="flex mx-auto mt-8 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Create</button>
+                <div class="flex justify-center">
+                    <p>
+                        <div id="qrCodeContainer" class="p-4"></div>
+                    </p>
+                </div>
+
+                <button type="submit" id="submit" class="flex mx-auto mt-8 text-white bg-transparent border border-solid border-white hover:bg-black hover:bg-black hover:text-white active:bg-pink-600 font-bold px-8 py-3 rounded-full outline-none focus:outline-none  ease-linear transition-all duration-150 text-lg">Get a short one!</button>
             </div>
         </section>
     </form>
+    <footer class="h-10 bg-gradient-to-r from-black via-blue-1000 to-gray-900 flex text-white ">
+        <span class="mx-auto opacity-25">
+            By <a href="http://web.amgra.hns.to/" target="_blank">Alejandro</a> & Vlad
+        </span>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', onReady, false);
 
         function onReady() {
+
+            var QR_CODE = new QRCode("qrCodeContainer", {
+                width: 110,
+                height: 110,
+                padding: '1em',
+                background: '#000000',
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+
             if (document.location.search) {
                 var searchString = document.location.search.substr(1);
                 var params = searchString.split('&');
@@ -64,12 +85,14 @@
                         var shortUrlEncoded = one.split('=');
                         if (shortUrlEncoded[1]) {
                             var shortUrl = decodeURIComponent(shortUrlEncoded[1]);
+                            QR_CODE.makeCode(shortUrl);
                             document.getElementById('shortUrl').innerHTML = shortUrl;
                             document.getElementById('shortUrlContainer').classList.toggle('hidden');
                         }
                     }
                 });
             }
+
         }
     </script>
 </body>
