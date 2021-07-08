@@ -33,6 +33,10 @@ npm run dev
 ```shell
 npm run start
 ```
+### Run Docker
+```shell
+docker compose up(make sure .env file has proper db credentials)
+```
 
 ## How to use
 ### Inserting
