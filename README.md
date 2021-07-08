@@ -34,8 +34,9 @@ npm run dev
 npm run start
 ```
 ### Run Docker
+To run docker, make sure **.env** file has the proper db credentials. After the service is up, you can access your app at `localhost:5000`
 ```shell
-docker compose up(make sure .env file has proper db credentials)
+docker compose up
 ```
 
 ## How to use
