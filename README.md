@@ -64,3 +64,15 @@ http://localhost:5000/<short-code>
 ## Thunder Client
 You can import the collection under `/docs`
 ![thunder](https://user-images.githubusercontent.com/3884823/124386367-0a476680-dca8-11eb-8fae-76d22bdda0e4.png)
+
+
+## POC utility
+In case we need in the future to use a file-based config:
+```
+# /config/default.json
+{"foo":"bar"}
+
+const config = require('config');
+config.get('foo');
+```
+

@@ -1,16 +1,19 @@
 const shortId = require('shortid');
 const db = require('../config/dbconfig');
-const { buildShortUrl } = require('../helpers/common');
 const validator = require('../helpers/validation-schemas').createUrlSchema;
 const SCHEMA = process.env.INSTANCE_SCHEMA;
 const TABLE = 'url_records';
 
-const insertUrl = async (longUrl) => {
+function buildShortUrl(origin, shortCode) {
+    return [origin,shortCode].join('/');
+}
+
+const insertUrl = async (origin, longUrl) => {
     const QUERY = `SELECT * FROM ${SCHEMA}.${TABLE} WHERE longUrl="${longUrl}" LIMIT 1`;
     const exists = await db.query(QUERY);
     if (exists.data.length) {
         const { urlCode } = exists.data[0];
-        const shortUrl = buildShortUrl(urlCode);
+        const shortUrl = buildShortUrl(origin, urlCode);
         return { longUrl, shortUrl };
     } else {
         const urlCode = shortId.generate();
@@ -23,7 +26,7 @@ const insertUrl = async (longUrl) => {
                 counter: 0,
             }]
         }).then(() => {
-            const shortUrl = buildShortUrl(urlCode);
+            const shortUrl = buildShortUrl(origin, urlCode);
             return { longUrl, shortUrl };
         }, error => {
             throw error;
@@ -37,7 +40,7 @@ const createShortURL = async(req, res) => {
     const redirect = req.body.redirect;
     if (error) {
         if (redirect) {
-            res.redirect('http://localhost:5000/?error');
+            res.redirect(req.headers.origin + '/?error=1');
         }
         else {
             res.status(400).json({message: error.message});
@@ -45,15 +48,20 @@ const createShortURL = async(req, res) => {
     }
     else {
         try {
-            const data = await insertUrl(body.longUrl);
+            const data = await insertUrl(req.headers.origin, body.longUrl);
             if (redirect) {
-                res.redirect('http://localhost:5000/?shortUrl=' + encodeURIComponent(data.shortUrl));
+                res.redirect('/?shortUrl=' + encodeURIComponent(data.shortUrl));
             }
             else {
                 res.json(data);
             }
         } catch (error) {
-            res.status(400).json({message: error.error});
+            if (redirect) {
+                res.redirect(req.headers.origin + '/?error=1');
+            }
+            else {
+                res.status(400).json({message: error.error});
+            }
         }
     }
 }
@@ -97,7 +105,7 @@ const getOne = async (req, res) => {
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} WHERE urlCode = "${shortCode}" LIMIT 1`;
     try {
         const list = await db.query(SQL);
-        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode));
+        list.data.map(one => one.shortUrl = buildShortUrl(req.headers.origin, one.urlCode));
         res.json(list.data);        
     } catch (error) {
         res.status(404).send([]);
@@ -108,7 +116,7 @@ const getLast5 = async (req, res) => {
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY __createdtime__ DESC LIMIT 5`;
     try {
         const list = await db.query(SQL);
-        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
+        list.data.map(one => one.shortUrl = buildShortUrl(req.headers.origin, one.urlCode))
         res.json(list.data);
     } catch (error) {
         res.json([]);
@@ -119,7 +127,7 @@ const getMostPopular5 = async (req, res) => {
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY counter DESC LIMIT 5`;
     try {
         const list = await db.query(SQL);
-        list.data.map(one => one.shortUrl = buildShortUrl(one.urlCode))
+        list.data.map(one => one.shortUrl = buildShortUrl(req.headers.origin, one.urlCode))
         res.json(list.data);
     } catch (error) {
         res.json([]);
