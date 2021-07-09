@@ -36,11 +36,14 @@ const insertUrl = async (origin, longUrl) => {
 }
 
 const createShortURL = async(req, res) => {
-    const { error, value: body } = validator.validate(req.body);
+    const { error, value:body } = validator.validate(req.body);
     const redirect = req.body.redirect;
     if (error) {
         if (redirect) {
             res.redirect(req.headers.origin + '/?error=1');
+        }
+        else {
+            res.status(400).json({message: error.message});
         }
     } else {
         try {
@@ -80,7 +83,7 @@ function increaseCounter(item) {
     }
 }
 
-const redirectUrl = async(req, res) => {
+const redirectUrl = async (req, res) => {
     const shortCode = req.params.shortCode;
     const SQL = `SELECT longUrl,id,counter FROM ${SCHEMA}.${TABLE} WHERE urlCode = "${shortCode}" LIMIT 1`;
     const list = await db.query(SQL);
@@ -93,7 +96,7 @@ const redirectUrl = async(req, res) => {
     }
 };
 
-const getOne = async(req, res) => {
+const getOne = async (req, res) => {
     const shortCode = req.params.shortCode;
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} WHERE urlCode = "${shortCode}" LIMIT 1`;
     try {
@@ -105,7 +108,7 @@ const getOne = async(req, res) => {
     }
 };
 
-const getLast5 = async(req, res) => {
+const getLast5 = async (req, res) => {
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY __createdtime__ DESC LIMIT 5`;
     try {
         const list = await db.query(SQL);
@@ -116,7 +119,7 @@ const getLast5 = async(req, res) => {
     }
 };
 
-const getMostPopular5 = async(req, res) => {
+const getMostPopular5 = async (req, res) => {
     const SQL = `SELECT longUrl, id, counter, urlCode FROM ${SCHEMA}.${TABLE} ORDER BY counter DESC LIMIT 5`;
     try {
         const list = await db.query(SQL);
@@ -127,7 +130,7 @@ const getMostPopular5 = async(req, res) => {
     }
 };
 
-const maintenance = async(req, res) => {
+const maintenance = async (req, res) => {
     // DROP COLUMN
     // const options = {
     //     schema: SCHEMA,
